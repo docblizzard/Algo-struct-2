@@ -1,0 +1,63 @@
+/* ----------------------------------------------------------------
+   ALGO   :  union (solution possible)
+   balmas    01/2022
+   ----------------------------------------------------------------
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// base contient 5263 valeurs
+// liste contient 857 valeurs
+#include "donnees.c"
+
+int chercher_nb(int x, int *tab, int max);
+
+main() {
+  int i, res, tot, nbb, nbl;
+  for (i=0; base[i]!=0; i++);
+  printf("nb elt dans base %d\n", i);
+  tot=nbb=i;
+
+  for (i=0;liste[i]!=0;i++);
+  nbl=i;
+  printf("nb elt dans liste %d\n", i);
+  
+  for(i=0;i<nbl;i++) {
+    res=chercher_nb(liste[i], base, nbb);
+    if (res == -1) {
+      base[tot]=liste[i];
+      tot++;
+    } else {
+      printf("valeur existante : %d\n", liste[i]);
+    }
+  }
+  printf("%d %d --> %d\n", nbb, nbl, tot);
+}
+
+int chercher_nb (int x, int *tab, int max) {
+int i;
+
+        i = 0;
+        while (i<max)
+        {
+          if (tab[i] == x)
+                /* elt trouve, on ramene sa position */
+                return (i);
+          else
+                i++;
+        }
+        /* elt pas trouve, code -1 */
+        return (-1);
+}
+/* ---------------------------------------------------------------------- */
+
+/* trace d'execution
+
+nb elt dans base 5263
+nb elt dans liste 857
+43 4217
+439 3831
+5263 857 --> 6118
+
+*/
